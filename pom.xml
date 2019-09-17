@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>framework-starter</artifactId>
+        <groupId>com.zjdex.framework</groupId>
+        <version>1.4</version>
+    </parent>
+    <groupId>co.lindj.dubbo</groupId>
+    <artifactId>dubbopro</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>dubbopro</name>
+
+    <modules>
+        <module>dubbopro-client</module>
+        <module>dubbopro-beans</module>
+        <module>dubbopro-server</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <dubbo.version>2.7.3</dubbo.version>
+    </properties>
+
+    <dependencies>
+    </dependencies>
+</project>

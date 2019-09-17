@@ -1,0 +1,91 @@
+mybatis:
+  mapper-locations: mapper/*.xml
+spring:
+  application:
+    name: dubbopro-server
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://183.131.202.186:3306/lindj?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: wanbo@123
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,slf4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  redission:
+    enable: false
+    # 连接空闲超时
+    idleConnectionTimeout: 10000
+    # 连接超时 毫秒
+    connectTimeout: 10000
+    # 命令等待超时 毫秒
+    timeout: 3000
+    # 命令失败重试次数
+    retryAttempts: 3
+    # 命令重试发送时间间隔
+    retryInterval: 1500
+    password: Gepoint
+    # 单个连接最大订阅数量
+    subscriptionsPerConnection: 5
+    # 客户端名称
+    clientName: ${spring.application.name}
+    # 节点地址
+    address: "redis://183.131.202.13:6379"
+    subscriptionConnectionMinimumIdleSize: 1
+    subscriptionConnectionPoolSize: 50
+    # 最小空闲连接数
+    connectionMinimumIdleSize: 32
+    # 连接池大小
+    connectionPoolSize: 64
+    database: 0
+server:
+  port: 23522
+logging:
+  level:
+    com.zjdex: DEBUG
+  config: classpath:logback-spring.xml
+#  path: /data/servers/logs/${spring.application.name}/
+constants:
+  writeMapExpire: 180
+  readMapExpire: 30
+  writeMapSize: 1000
+  threadPool:
+    enable: true
+    corePoolSize: 5
+
+# dubbo测试
+embedded:
+  zookeeper:
+    port: 2181
+dubbo:
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: zookeeper://183.131.202.13:${embedded.zookeeper.port}
+  scan:
+    base-packages: co.lindj.dubbo.service
+demo:
+  service:
+    version: 1.0.1
+user:
+  service:
+    version: ${demo.service.version}
+
+rocketmq:
+  # 生产者配置
+  producer:
+    groupName: ${spring.application.name}
+    namesrvAddr: 183.131.202.169:9876
+    transaction: true
